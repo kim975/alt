@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="customAccessDeniedHandler" class="com.alt.security.CustomAccessDeniedHandler"/>
+	
+	<bean id="customLoginSuccessHandler" class="com.alt.security.CustomLoginSuccessHandler"/>
+	
+	<!-- VO(ClientVO, AuthVO)를 통한 로그인 처리 -->
+	<bean id="customUserDetailsService" class="com.alt.security.CustomUserDetailsService"/>
+	
+	
+	<!-- 32장 -->
+	<!-- customNoOpPasswordEncoder 인터페이스의 구현 클래스를 빈으로 생성-->
+	<bean id="customNoOpPasswordEncoder" class="com.alt.security.CustomNoOpPasswordEncoder"/>
+	
+	<!-- 스프링 시큐리티의 BCryptPasswordEncoder를 이용한 사용자 암호 암호화   -->
+	<!-- <bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/> -->
+	
+	<!-- 32장 -->
+	<!-- JDBC 접속을 위해 필요한 DataSource 빈 정의하기 -->
+	<!-- <bean id="dataSourceJDBC" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+    	<property name="driverClass" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>   
+		<property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl"></property>
+		<property name="username" value="book_ex" />
+		<property name="password" value="book_ex" />
+	</bean> -->
+	
+	<security:http auto-config="true" use-expressions="true">
+	
+
+		
+		<!-- <security:form-login/> -->
+		<security:form-login login-page="/client/loginForm" authentication-success-handler-ref="customLoginSuccessHandler"/>
+		<!-- <security:form-login login-page="/client/loginForm"/> -->
+		<!-- 위 login-page 속성에 설정된 URI는 처리하는 컨트롤러의 메소드는 반드식 GET방식으로 요청을 처리해야 함. -->
+		
+		<security:logout logout-url="/logout" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID"/>
+		
+		<!-- 35장 스프링 시큐리티 자동 로그인 -->
+		<security:remember-me data-source-ref="dataSource" remember-me-parameter="remember-me" token-validity-seconds="604800"/>
+		
+		<!-- 에러페이지 직접 지정 -->
+		<!-- <security:access-denied-handler error-page="/sample30/accessError"/> -->
+		<!-- 빈을 통한 에러페이지 -->
+		<security:access-denied-handler ref="customAccessDeniedHandler"/>
+		<security:access-denied-handler ref="customLoginSuccessHandler"/>
+		
+	</security:http>
+	
+	
+	<!-- 32장  JdbcUserDetailsManager 클래스 이용 -->
+	<security:authentication-manager> 
+	
+		<security:authentication-provider user-service-ref="customUserDetailsService">	
+			
+			<!-- customNoOpPasswordEncoder 인터페이스의 구현 클래스를 빈으로 생성-->
+			<security:password-encoder ref="customNoOpPasswordEncoder"/>
+			
+			<!-- 스프링 시큐리티의 BCryptPasswordEncoder를 이용한 사용자 암호 암호화   -->
+			<!-- <security:password-encoder ref="bCryptPasswordEncoder"/> -->
+			
+		</security:authentication-provider> 
+		
+	</security:authentication-manager>
+	
+</beans>
