@@ -1,9 +1,17 @@
 ## 기술 스택
 
-- 언어
+- Front-End
+  - HTML, CSS, JavaScript
+  - JQuery
+  - BootStrap
+- Back-End
   - Java
-  - **JavaScript (ES2015)** / node.js
-- 프레임워크
+  - Mybatis
+- WebServer
+  - Apache-Tomcat 9.0
+- DataBase
+  - Oracle 11g
+- Frame-work
   - Spring
 
  
