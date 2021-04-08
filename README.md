@@ -104,6 +104,9 @@ public class SocketHandler extends TextWebSocketHandler {
 		ChatMsgVO chatMsgVO = new ChatMsgVO(roomno, id, msg);
 		
 		chatService.insertMsg(chatMsgVO);
+		
+		...
+	}
 	...
 }
 ```
