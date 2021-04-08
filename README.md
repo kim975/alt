@@ -105,6 +105,7 @@ public class SocketHandler extends TextWebSocketHandler {
 		
 		chatService.insertMsg(chatMsgVO);
 	...
+}
 ```
 
 WebSocketConfig로 SocketHandler를 연결 시켜준 다음 chatService를 이용해서 데이터베이스의 접근을 제어했습니다.
