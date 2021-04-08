@@ -69,7 +69,7 @@ spring-security의 기능인 authorize를 이용하여 권한을 확인해서 �
 <img width='300px' height='400px' src='https://user-images.githubusercontent.com/81149759/113966294-c9d37a80-9869-11eb-8fba-b9e51d0828d0.PNG'><img width='300px' height='400px' src='https://user-images.githubusercontent.com/81149759/113966643-701f8000-986a-11eb-880e-e00076027a89.PNG'>
 
 채팅은 websocket을 이용하여 소비자가 판매자와의 채팅 버튼을 누르면 해당게시글의 판매자와 새로운 채팅방을 개설해 채팅을 할 수 있게 구현했습니다.
-```
+```java
 public class WebSocketConfig implements WebSocketConfigurer{
 
 	@Autowired
@@ -84,7 +84,7 @@ public class WebSocketConfig implements WebSocketConfigurer{
 
 ```
 
-```
+```java
 public class SocketHandler extends TextWebSocketHandler {
 	...
 	
