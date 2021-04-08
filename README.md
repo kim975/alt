@@ -22,3 +22,7 @@ ALT는 기존 쇼핑몰들과는 달리 판매자와 소비자간 채팅을 이�
 - Framework
   - Spring
 
+
+
+
+<img width='300px' height='300px' src='https://user-images.githubusercontent.com/81149759/113966294-c9d37a80-9869-11eb-8fba-b9e51d0828d0.PNG'>
