@@ -268,8 +268,6 @@ $(document).ajaxSend(function(e, xhr, options) {
 				
 			}); //end getJSON
 			
-			
-			
 		})();
 	});
 	
