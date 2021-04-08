@@ -69,6 +69,45 @@ spring-security의 기능인 authorize를 이용하여 권한을 확인해서 �
 <img width='300px' height='400px' src='https://user-images.githubusercontent.com/81149759/113966294-c9d37a80-9869-11eb-8fba-b9e51d0828d0.PNG'><img width='300px' height='400px' src='https://user-images.githubusercontent.com/81149759/113966643-701f8000-986a-11eb-880e-e00076027a89.PNG'>
 
 채팅은 websocket을 이용하여 소비자가 판매자와의 채팅 버튼을 누르면 해당게시글의 판매자와 새로운 채팅방을 개설해 채팅을 할 수 있게 구현했습니다.
+```
+public class WebSocketConfig implements WebSocketConfigurer{
+
+	@Autowired
+	SocketHandler socketHandler;
+	
+	@Override
+	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+		registry.addHandler(socketHandler, "/chating/{roomno}");
+	}
+	
+}
+
+```
+
+```
+public class SocketHandler extends TextWebSocketHandler {
+	...
+	
+	@Override
+	public void handleTextMessage(WebSocketSession session, TextMessage message) {
+		//메시지 발송
+		String msgstr = message.getPayload();
+		
+		JSONObject obj = jsonToObjectParser(msgstr);
+		
+		log.info("message.toString(): " + obj.toString());
+		
+		String roomno = (String) obj.get("roomNumber");
+		String id = (String) obj.get("userName");
+		String msg = (String) obj.get("msg");
+		
+		ChatMsgVO chatMsgVO = new ChatMsgVO(roomno, id, msg);
+		
+		chatService.insertMsg(chatMsgVO);
+	...
+```
+
+WebSocketConfig로 SocketHandler를 연결 시켜준 다음 chatService를 이용해서 데이터베이스의 접근을 제어했습니다.
 
 
 * #### spring-security를 이용한 로그인 구현
