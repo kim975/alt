@@ -54,7 +54,7 @@ ajax를 이용하여 판매게시판 번호를 boardController로 넘겨 이미�
 ```
 <sec:authorize access="hasAnyRole('ROLE_CLIENT','ROLE_VENDOR')">
   <button style="margin-right: 5px;" id='moveBasket' type="button" class="btn btn-outline-success" style="color: #009970;">장바구니</button>
-  <a href="" class="btn btn-success" style="background-color: #009970;" onclick="javascript:window.open('/chat?vid=${sale.vid}','new','left=50, top=50, width=600, height=800')">판매자와 연락하기</a>           				
+  <a href="" class="btn btn-success" style="background-color: #009970;" onclick="javascript:window.open('/chat?vid=${sale.vid}','new','left=50, top=50, width=600, height=800')">판매자와 연락하기</a>
 </sec:authorize>
 				
 <sec:authorize access="isAnonymous()">
