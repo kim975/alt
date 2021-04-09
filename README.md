@@ -51,7 +51,7 @@ $.getJSON("/board/getImageList", {sno: snoStr}, function(arr) {
 
 ajax를 이용하여 판매게시판 번호를 boardController로 넘겨 이미지의 이름을 가져오고 downloadController의 display를 이용하여 이미지의 경로를 찾아 표시합니다.
 
-```
+```xml
 <sec:authorize access="hasAnyRole('ROLE_CLIENT','ROLE_VENDOR')">
   <button style="margin-right: 5px;" id='moveBasket' type="button" class="btn btn-outline-success" style="color: #009970;">장바구니</button>
   <a href="" class="btn btn-success" style="background-color: #009970;" onclick="javascript:window.open('/chat?vid=${sale.vid}','new','left=50, top=50, width=600, height=800')">판매자와 연락하기</a>
