@@ -115,5 +115,49 @@ WebSocketConfig로 SocketHandler를 연결 시켜준 다음 chatService를 이�
 
 
 * ### spring-security를 이용한 로그인 구현
+```xml
+<!-- 회원 security -->
+<security:http 
+	pattern="/client/log*"
+	auto-config="true" 
+	use-expressions="true" 
+	authentication-manager-ref="clientAuthManager">
+        
+	...
+</security:http>
+<!-- 업체 security -->
+<security:http 
+	pattern="/vendor/log*"
+	auto-config="true" 
+	use-expressions="true" 
+	authentication-manager-ref="vendorAuthManager">
+        
+	...
+</security:http>
+```
+
+```xml
+<!-- 회원 security -->
+<security:authentication-manager id="clientAuthManager"> 
+	
+	<security:authentication-provider user-service-ref="CustomClientDetailService">	
+	
+		...
+		
+	</security:authentication-provider> 
+		
+</security:authentication-manager>
+
+<!-- 업체 security -->
+<security:authentication-manager id="vendorAuthManager"> 
+	
+	<security:authentication-provider user-service-ref="customVendorDetailsService">			
+	
+		...
+		
+	</security:authentication-provider> 
+		
+</security:authentication-manager>
+```
 
 소비자와 판매자의 데이터베이스 접근을 제어하기 위해 http와 authentication-manager를 2개를 나누어 관리할 수 있게 구현했습니다.
