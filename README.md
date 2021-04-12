@@ -20,7 +20,7 @@ ALT는 팀프로젝트로 기존 쇼핑몰들과는 달리 판매자와 소비�
   - Spring
 
 ## 프로젝트 기능 및 코드 설명
-* #### 게시판 메인 및 상품 상세 페이지와 댓글
+* ### 게시판 메인 및 상품 상세 페이지와 댓글
 <img width='300px' height='400px' src='https://user-images.githubusercontent.com/81149759/113966650-71e94380-986a-11eb-92c4-fdd51cc01066.PNG'><img width='300px' height='400px' src='https://user-images.githubusercontent.com/81149759/113966648-7150ad00-986a-11eb-9e01-af4e171ded00.PNG'><img width='300px' height='400px' src='https://user-images.githubusercontent.com/81149759/113966646-7150ad00-986a-11eb-868a-e44f4fe35559.PNG'>
 
 
@@ -51,10 +51,10 @@ $.getJSON("/board/getImageList", {sno: snoStr}, function(arr) {
 
 ajax를 이용하여 판매게시판 번호를 boardController로 넘겨 이미지의 이름을 가져오고 downloadController의 display를 이용하여 이미지의 경로를 찾아 표시합니다.
 
-```
+```javascript
 <sec:authorize access="hasAnyRole('ROLE_CLIENT','ROLE_VENDOR')">
   <button style="margin-right: 5px;" id='moveBasket' type="button" class="btn btn-outline-success" style="color: #009970;">장바구니</button>
-  <a href="" class="btn btn-success" style="background-color: #009970;" onclick="javascript:window.open('/chat?vid=${sale.vid}','new','left=50, top=50, width=600, height=800')">판매자와 연락하기</a>           				
+  <a href="" class="btn btn-success" style="background-color: #009970;" onclick="javascript:window.open('/chat?vid=${sale.vid}','new','left=50, top=50, width=600, height=800')">판매자와 연락하기</a>
 </sec:authorize>
 				
 <sec:authorize access="isAnonymous()">
@@ -65,7 +65,7 @@ ajax를 이용하여 판매게시판 번호를 boardController로 넘겨 이미�
 
 spring-security의 기능인 authorize를 이용하여 권한을 확인해서 비로그인과 로그인을 구별하여 표시하게 구성했습니다.
 
-* #### 채팅
+* ### 채팅
 <img width='300px' height='400px' src='https://user-images.githubusercontent.com/81149759/113966294-c9d37a80-9869-11eb-8fba-b9e51d0828d0.PNG'><img width='300px' height='400px' src='https://user-images.githubusercontent.com/81149759/113966643-701f8000-986a-11eb-880e-e00076027a89.PNG'>
 
 채팅은 websocket을 이용하여 소비자가 판매자와의 채팅 버튼을 누르면 해당게시글의 판매자와 새로운 채팅방을 개설해 채팅을 할 수 있게 구현했습니다.
@@ -114,6 +114,50 @@ public class SocketHandler extends TextWebSocketHandler {
 WebSocketConfig로 SocketHandler를 연결 시켜준 다음 chatService를 이용해서 데이터베이스의 접근을 제어했습니다.
 
 
-* #### spring-security를 이용한 로그인 구현
+* ### spring-security를 이용한 로그인 구현
+```xml
+<!-- 회원 security -->
+<security:http 
+	pattern="/client/log*"
+	auto-config="true" 
+	use-expressions="true" 
+	authentication-manager-ref="clientAuthManager">
+        
+	...
+</security:http>
+<!-- 업체 security -->
+<security:http 
+	pattern="/vendor/log*"
+	auto-config="true" 
+	use-expressions="true" 
+	authentication-manager-ref="vendorAuthManager">
+        
+	...
+</security:http>
+```
+
+```xml
+<!-- 회원 security -->
+<security:authentication-manager id="clientAuthManager"> 
+	
+	<security:authentication-provider user-service-ref="CustomClientDetailService">	
+	
+		...
+		
+	</security:authentication-provider> 
+		
+</security:authentication-manager>
+
+<!-- 업체 security -->
+<security:authentication-manager id="vendorAuthManager"> 
+	
+	<security:authentication-provider user-service-ref="customVendorDetailsService">			
+	
+		...
+		
+	</security:authentication-provider> 
+		
+</security:authentication-manager>
+```
 
 소비자와 판매자의 데이터베이스 접근을 제어하기 위해 http와 authentication-manager를 2개를 나누어 관리할 수 있게 구현했습니다.
