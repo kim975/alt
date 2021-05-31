@@ -20,17 +20,17 @@ ALT는 팀프로젝트로 기존 쇼핑몰들과는 달리 판매자와 소비�
   - Spring
 
 ## 구현 코드 상세링크
-<a src='https://github.com/kim975/alt/blob/main/src/main/java/com/alt/controller/BoardController.java'>BoardController</a>
-<a src='https://github.com/kim975/alt/blob/main/src/main/java/com/alt/service/BoardService.java'>BoardService</a>
-<a src='https://github.com/kim975/alt/blob/main/src/main/resources/com/alt/mapper/BoardMapper.xml'>BoardMapper</a>
-
-<a src='https://github.com/kim975/alt/blob/main/src/main/java/com/alt/controller/ChatController.java'>ChatController</a>
-<a src='https://github.com/kim975/alt/blob/main/src/main/java/com/alt/service/ChatService.java'>ChatService</a>
-<a src='https://github.com/kim975/alt/blob/main/src/main/java/com/alt/mapper/ChatMapper.java'>ChatMapper</a>
-<a src='https://github.com/kim975/alt/blob/main/src/main/java/com/alt/util/SocketHandler.java'>SocketHandler</a>
-
-<a src='https://github.com/kim975/alt/blob/main/src/main/webapp/WEB-INF/spring/security-context.xml'>Spring-Security</a>
-
+- Board(게시판)
+  - [BoardController](https://github.com/kim975/alt/blob/main/src/main/java/com/alt/controller/BoardController.java)
+  - [BoardService](https://github.com/kim975/alt/blob/main/src/main/java/com/alt/service/BoardService.java)
+  - [BoardMapper](https://github.com/kim975/alt/blob/main/src/main/resources/com/alt/mapper/BoardMapper.xml)
+- Chat
+  - [ChatController](https://github.com/kim975/alt/blob/main/src/main/java/com/alt/controller/ChatController.java)
+  - [ChatService](https://github.com/kim975/alt/blob/main/src/main/java/com/alt/service/ChatService.java)
+  - [ChatMapper](https://github.com/kim975/alt/blob/main/src/main/java/com/alt/mapper/ChatMapper.java)
+  - [SocketHandler](https://github.com/kim975/alt/blob/main/src/main/java/com/alt/util/SocketHandler.java)
+- Spring-Security
+  - [Spring-Security](https://github.com/kim975/alt/blob/main/src/main/webapp/WEB-INF/spring/security-context.xml)
 
 ## 프로젝트 기능 및 코드 설명
 * ### 게시판 메인 및 상품 상세 페이지와 댓글
