@@ -9,27 +9,21 @@ import com.alt.domain.ChatRoomVO;
 
 public interface ChatMapper {
 	
-	//지영
 	//채팅방 id 확인
 	public int selectRoomCheck(@Param("cid") String cid,@Param("vid") String vid);
 	
-	//지영
 	//채팅방 id 확인
 	public String selectRoom(@Param("cid") String cid,@Param("vid") String vid);
 	
-	//지영
 	//채팅방 생성
 	public void createRoom(ChatRoomVO chatRoomVO);
 	
-	//지영
 	//채팅방 삭제	- 채팅내용포함
 	public int removeRoom(@Param("cid") String cid,@Param("vid") String vid);
 	
-	//지영
 	//vendor 채팅방 목록
 	public List<ChatRoomVO> selectVendorChatRoom(String vid);
 	
-	//지영
 	//client 채팅방 목록
 	public List<ChatRoomVO> selectClientChatRoom(String cid);
 	
