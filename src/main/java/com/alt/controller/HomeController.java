@@ -22,7 +22,7 @@ import com.alt.service.ReplyService;
 public class HomeController {
 	
 	//private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+	//dddd
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
